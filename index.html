@@ -558,15 +558,36 @@
       margin: 0 auto 56px;
       line-height: 1.55;
     }
-    .testimonial-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      max-width: 1100px;
-      margin: 0 auto;
+    /* marquee wrapper */
+    .t-marquee-wrap {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
     }
-    @media(max-width:900px){ .testimonial-grid { grid-template-columns: repeat(2,1fr); } }
-    @media(max-width:580px){ .testimonial-grid { grid-template-columns: 1fr; } }
+    .t-marquee-wrap::before,
+    .t-marquee-wrap::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 80px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .t-marquee-wrap::before { left: 0;  background: linear-gradient(to right, #f5f5f7, transparent); }
+    .t-marquee-wrap::after  { right: 0; background: linear-gradient(to left,  #f5f5f7, transparent); }
+
+    .t-marquee-track {
+      display: flex;
+      width: max-content;
+      gap: 20px;
+      animation: tScroll 32s linear infinite;
+    }
+    .t-marquee-track:hover { animation-play-state: paused; }
+
+    @keyframes tScroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
 
     .t-card {
       background: #fff;
@@ -574,13 +595,14 @@
       padding: 28px 26px 24px;
       text-align: left;
       box-shadow: 0 2px 12px rgba(0,0,0,.06);
-      transition: transform .25s, box-shadow .25s;
+      transition: box-shadow .25s;
       display: flex;
       flex-direction: column;
       gap: 16px;
+      width: 320px;
+      flex-shrink: 0;
     }
     .t-card:hover {
-      transform: translateY(-4px);
       box-shadow: 0 10px 32px rgba(0,0,0,.10);
     }
     .t-card-header {
@@ -1029,93 +1051,169 @@
   <h2>Marcas que confían en nosotros</h2>
   <p class="section-sub">Más de 500 empresas han personalizado sus productos con ProMarca. Esto es lo que dicen.</p>
 
-  <div class="testimonial-grid">
+  <div class="t-marquee-wrap">
+    <div class="t-marquee-track">
 
-    <!-- Card 1 -->
-    <div class="t-card">
-      <div class="t-card-header">
-        <div class="t-avatar-placeholder">MF</div>
-        <div>
-          <div class="t-name">María Fernanda Reyes</div>
-          <div class="t-handle">Gerente de Marketing · Grupo Bancario</div>
+      <!-- ── SET 1 ── -->
+      <div class="t-card">
+        <div class="t-card-header">
+          <div class="t-avatar-placeholder">MF</div>
+          <div>
+            <div class="t-name">María Fernanda Reyes</div>
+            <div class="t-handle">Gerente de Marketing · Grupo Bancario</div>
+          </div>
         </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-body">"Los termos personalizados fueron el mejor regalo corporativo que hemos dado. La calidad superó todas nuestras expectativas."</p>
+        <div class="t-date">Marzo 2025</div>
       </div>
-      <div class="t-stars">★★★★★</div>
-      <p class="t-body">"Los termos personalizados fueron el mejor regalo corporativo que hemos dado. La calidad superó todas nuestras expectativas y la atención fue excepcional."</p>
-      <div class="t-date">Marzo 2025</div>
-    </div>
 
-    <!-- Card 2 -->
-    <div class="t-card">
-      <div class="t-card-header">
-        <div class="t-avatar-placeholder">CA</div>
-        <div>
-          <div class="t-name">Carlos Arbeláez</div>
-          <div class="t-handle">Director Comercial · Constructora Bolívar</div>
+      <div class="t-card">
+        <div class="t-card-header">
+          <div class="t-avatar-placeholder">CA</div>
+          <div>
+            <div class="t-name">Carlos Arbeláez</div>
+            <div class="t-handle">Director Comercial · Constructora Bolívar</div>
+          </div>
         </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-body">"Pedimos 300 gorras bordadas para un evento y llegaron perfectas, a tiempo y con un acabado increíble. Ya somos clientes fijos."</p>
+        <div class="t-date">Enero 2025</div>
       </div>
-      <div class="t-stars">★★★★★</div>
-      <p class="t-body">"Pedimos 300 gorras bordadas para un evento y llegaron perfectas, a tiempo y con un acabado increíble. Ya somos clientes fijos de ProMarca."</p>
-      <div class="t-date">Enero 2025</div>
-    </div>
 
-    <!-- Card 3 -->
-    <div class="t-card">
-      <div class="t-card-header">
-        <div class="t-avatar-placeholder">LG</div>
-        <div>
-          <div class="t-name">Laura Gómez</div>
-          <div class="t-handle">Coordinadora de RRHH · Sura</div>
+      <div class="t-card">
+        <div class="t-card-header">
+          <div class="t-avatar-placeholder">LG</div>
+          <div>
+            <div class="t-name">Laura Gómez</div>
+            <div class="t-handle">Coordinadora de RRHH · Sura</div>
+          </div>
         </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-body">"Los kits de bienvenida elevaron nuestra imagen como empleador. Nuestros nuevos colaboradores quedan encantados con cada detalle."</p>
+        <div class="t-date">Febrero 2025</div>
       </div>
-      <div class="t-stars">★★★★★</div>
-      <p class="t-body">"Los kits de bienvenida que diseñamos con ProMarca elevaron nuestra imagen como empleador. Nuestros nuevos colaboradores quedan encantados."</p>
-      <div class="t-date">Febrero 2025</div>
-    </div>
 
-    <!-- Card 4 -->
-    <div class="t-card">
-      <div class="t-card-header">
-        <div class="t-avatar-placeholder">JM</div>
-        <div>
-          <div class="t-name">Julián Moreno</div>
-          <div class="t-handle">CEO · Agencia Creativa DM</div>
+      <div class="t-card">
+        <div class="t-card-header">
+          <div class="t-avatar-placeholder">JM</div>
+          <div>
+            <div class="t-name">Julián Moreno</div>
+            <div class="t-handle">CEO · Agencia Creativa DM</div>
+          </div>
         </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-body">"Rápidos, creativos y con muy buen precio. Pedimos tulas y lapiceros para una campaña y el resultado fue 10/10."</p>
+        <div class="t-date">Abril 2025</div>
       </div>
-      <div class="t-stars">★★★★★</div>
-      <p class="t-body">"Rápidos, creativos y con muy buen precio. Pedimos tulas y lapiceros para una campaña y el resultado fue 10/10. Lo recomiendo sin duda."</p>
-      <div class="t-date">Abril 2025</div>
-    </div>
 
-    <!-- Card 5 -->
-    <div class="t-card">
-      <div class="t-card-header">
-        <div class="t-avatar-placeholder">VP</div>
-        <div>
-          <div class="t-name">Valentina Pineda</div>
-          <div class="t-handle">Brand Manager · American Airlines CO</div>
+      <div class="t-card">
+        <div class="t-card-header">
+          <div class="t-avatar-placeholder">VP</div>
+          <div>
+            <div class="t-name">Valentina Pineda</div>
+            <div class="t-handle">Brand Manager · American Airlines CO</div>
+          </div>
         </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-body">"1.000 memorias USB para un congreso internacional. ProMarca lo manejó todo con total profesionalismo y puntualidad."</p>
+        <div class="t-date">Diciembre 2024</div>
       </div>
-      <div class="t-stars">★★★★★</div>
-      <p class="t-body">"Necesitábamos 1.000 memorias USB con nuestra marca para un congreso internacional. ProMarca lo manejó todo con total profesionalismo y puntualidad."</p>
-      <div class="t-date">Diciembre 2024</div>
-    </div>
 
-    <!-- Card 6 -->
-    <div class="t-card">
-      <div class="t-card-header">
-        <div class="t-avatar-placeholder">RO</div>
-        <div>
-          <div class="t-name">Ricardo Ospina</div>
-          <div class="t-handle">Gerente General · Oracle Colombia</div>
+      <div class="t-card">
+        <div class="t-card-header">
+          <div class="t-avatar-placeholder">RO</div>
+          <div>
+            <div class="t-name">Ricardo Ospina</div>
+            <div class="t-handle">Gerente General · Oracle Colombia</div>
+          </div>
         </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-body">"Los cuadernos y sombrillas quedaron con un acabado premium que representa muy bien nuestra marca. Excelente experiencia."</p>
+        <div class="t-date">Noviembre 2024</div>
       </div>
-      <div class="t-stars">★★★★★</div>
-      <p class="t-body">"Excelente experiencia desde la cotización hasta la entrega. Los cuadernos y sombrillas personalizadas quedaron con un acabado premium que representa muy bien nuestra marca."</p>
-      <div class="t-date">Noviembre 2024</div>
-    </div>
 
-  </div>
+      <!-- ── SET 2 (duplicado para loop infinito) ── -->
+      <div class="t-card">
+        <div class="t-card-header">
+          <div class="t-avatar-placeholder">MF</div>
+          <div>
+            <div class="t-name">María Fernanda Reyes</div>
+            <div class="t-handle">Gerente de Marketing · Grupo Bancario</div>
+          </div>
+        </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-body">"Los termos personalizados fueron el mejor regalo corporativo que hemos dado. La calidad superó todas nuestras expectativas."</p>
+        <div class="t-date">Marzo 2025</div>
+      </div>
+
+      <div class="t-card">
+        <div class="t-card-header">
+          <div class="t-avatar-placeholder">CA</div>
+          <div>
+            <div class="t-name">Carlos Arbeláez</div>
+            <div class="t-handle">Director Comercial · Constructora Bolívar</div>
+          </div>
+        </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-body">"Pedimos 300 gorras bordadas para un evento y llegaron perfectas, a tiempo y con un acabado increíble. Ya somos clientes fijos."</p>
+        <div class="t-date">Enero 2025</div>
+      </div>
+
+      <div class="t-card">
+        <div class="t-card-header">
+          <div class="t-avatar-placeholder">LG</div>
+          <div>
+            <div class="t-name">Laura Gómez</div>
+            <div class="t-handle">Coordinadora de RRHH · Sura</div>
+          </div>
+        </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-body">"Los kits de bienvenida elevaron nuestra imagen como empleador. Nuestros nuevos colaboradores quedan encantados con cada detalle."</p>
+        <div class="t-date">Febrero 2025</div>
+      </div>
+
+      <div class="t-card">
+        <div class="t-card-header">
+          <div class="t-avatar-placeholder">JM</div>
+          <div>
+            <div class="t-name">Julián Moreno</div>
+            <div class="t-handle">CEO · Agencia Creativa DM</div>
+          </div>
+        </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-body">"Rápidos, creativos y con muy buen precio. Pedimos tulas y lapiceros para una campaña y el resultado fue 10/10."</p>
+        <div class="t-date">Abril 2025</div>
+      </div>
+
+      <div class="t-card">
+        <div class="t-card-header">
+          <div class="t-avatar-placeholder">VP</div>
+          <div>
+            <div class="t-name">Valentina Pineda</div>
+            <div class="t-handle">Brand Manager · American Airlines CO</div>
+          </div>
+        </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-body">"1.000 memorias USB para un congreso internacional. ProMarca lo manejó todo con total profesionalismo y puntualidad."</p>
+        <div class="t-date">Diciembre 2024</div>
+      </div>
+
+      <div class="t-card">
+        <div class="t-card-header">
+          <div class="t-avatar-placeholder">RO</div>
+          <div>
+            <div class="t-name">Ricardo Ospina</div>
+            <div class="t-handle">Gerente General · Oracle Colombia</div>
+          </div>
+        </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-body">"Los cuadernos y sombrillas quedaron con un acabado premium que representa muy bien nuestra marca. Excelente experiencia."</p>
+        <div class="t-date">Noviembre 2024</div>
+      </div>
+
+    </div><!-- /t-marquee-track -->
+  </div><!-- /t-marquee-wrap -->
 </section>
 
 
