@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cuadernos — ProMarca</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="catalog.css">
+</head>
+<body>
+<nav class="nav">
+  <a href="index.html" class="nav-logo"><img src="img/promarca-logo.png" alt="ProMarca" style="height:28px;width:auto;display:block;"></a>
+  <ul class="nav-links">
+    <li><a href="index.html#catalogo" class="active">Catálogo</a></li>
+    <li><a href="index.html#personalizacion">Personalización</a></li>
+    <li><a href="index.html#nosotros">Nosotros</a></li>
+    <li><a href="index.html#contacto">Contacto</a></li>
+  </ul>
+  <div class="nav-actions">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 44"><path d="M14.298,27.202l-3.87-3.87c0.701-0.929,1.122-2.081,1.122-3.332c0-3.06-2.489-5.55-5.55-5.55c-3.06,0-5.55,2.49-5.55,5.55c0,3.061,2.49,5.55,5.55,5.55c1.251,0,2.403-0.421,3.332-1.122l3.87,3.87c0.151,0.151,0.35,0.228,0.548,0.228s0.396-0.076,0.548-0.228C14.601,27.995,14.601,27.505,14.298,27.202z M1.55,20c0-2.454,1.997-4.45,4.45-4.45c2.454,0,4.45,1.997,4.45,4.45S8.454,24.45,6,24.45C3.546,24.45,1.55,22.454,1.55,20z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 44"><path d="m11.3535 16.0283h-1.0205a3.4229 3.4229 0 0 0 -3.333-2.9648 3.4229 3.4229 0 0 0 -3.333 2.9648h-1.02a2.1184 2.1184 0 0 0 -2.117 2.1162v7.7155a2.1186 2.1186 0 0 0 2.1162 2.1167h8.707a2.1186 2.1186 0 0 0 2.1168-2.1167v-7.7155a2.1184 2.1184 0 0 0 -2.1165-2.1162zm-4.3535-1.8652a2.3169 2.3169 0 0 1 2.2222 1.8652h-4.4444a2.3169 2.3169 0 0 1 2.2222-1.8652zm5.37 11.6969a1.0182 1.0182 0 0 1 -1.0166 1.0171h-8.7069a1.0182 1.0182 0 0 1 -1.0165-1.0171v-7.7155a1.0178 1.0178 0 0 1 1.0166-1.0166h8.707a1.0178 1.0178 0 0 1 1.0164 1.0166z"/></svg>
+  </div>
+</nav>
+<section class="cat-hero">
+  <nav class="breadcrumb"><a href="index.html">Inicio</a><span class="sep">/</span><a href="index.html#catalogo">Catálogo</a><span class="sep">/</span><span>Cuadernos</span></nav>
+  <p class="cat-hero-eyebrow">Catálogo 2026</p>
+  <h1 class="cat-hero-title">Cuadernos</h1>
+  <p class="cat-hero-sub">Ideas que se quedan. Cuadernos, libretas y agendas corporativas para que tu marca esté presente en cada nota.</p>
+  <div class="cat-hero-stats">
+    <div class="cat-stat"><div class="cat-stat-num">44</div><div class="cat-stat-label">Modelos</div></div>
+    <div class="cat-stat"><div class="cat-stat-num">5</div><div class="cat-stat-label">Materiales</div></div>
+    <div class="cat-stat"><div class="cat-stat-num">+15</div><div class="cat-stat-label">Colores</div></div>
+    <div class="cat-stat"><div class="cat-stat-num">A5–A4</div><div class="cat-stat-label">Tamaños</div></div>
+  </div>
+</section>
+<div class="filter-bar">
+  <button class="filter-btn active" data-filter="all">Todos</button>
+  <button class="filter-btn" data-filter="cuero">Cuero / PU</button>
+  <button class="filter-btn" data-filter="bambu">Bambú / Eco</button>
+  <button class="filter-btn" data-filter="tela">Tela</button>
+  <button class="filter-btn" data-filter="agenda">Agendas</button>
+  <div class="filter-sep"></div>
+  <select class="filter-sort" id="sortSelect"><option value="default">Ordenar por</option><option value="asc">Menor precio</option><option value="desc">Mayor precio</option></select>
+</div>
+<section class="products-section">
+  <p class="section-count" id="productCount">44 productos</p>
+  <div class="products-grid" id="productsGrid">
+    <article class="product-card" data-cat="cuero" data-price="28000">
+      <div class="product-thumb"><img src="img/products/cu-101.jpg" alt="CU-101" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="product-thumb-placeholder">📓</div></div>
+      <div class="product-info">
+        <div class="color-dots"><span class="color-dot" style="background:#1d1d1f"></span><span class="color-dot" style="background:#5c4033"></span><span class="color-dot" style="background:#2a4a6e"></span><span class="color-dot" style="background:#e63946"></span><span class="color-more">+4</span></div>
+        <p class="product-ref">CU-101</p><p class="product-name">Libreta cuero PU A5 80 hojas</p>
+        <div class="product-price-block"><span class="price-badge">Sin marca</span><p class="product-price">$ 28.000</p></div>
+        <a href="index.html#contacto" class="btn-personalizar">Personalizar</a>
+      </div>
+    </article>
+    <article class="product-card" data-cat="bambu" data-price="18000">
+      <div class="product-thumb"><img src="img/products/cu-210.jpg" alt="CU-210" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="product-thumb-placeholder">📔</div></div>
+      <div class="product-info">
+        <div class="color-dots"><span class="color-dot" style="background:#c8a96e"></span><span class="color-dot" style="background:#8b6914"></span></div>
+        <p class="product-ref">CU-210</p><p class="product-name">Cuaderno tapa bambú A5</p>
+        <div class="product-price-block"><span class="price-badge">Sin marca</span><p class="product-price">$ 18.000</p></div>
+        <a href="index.html#contacto" class="btn-personalizar">Personalizar</a>
+      </div>
+    </article>
+    <article class="product-card" data-cat="agenda" data-price="45000">
+      <div class="product-thumb"><img src="img/products/cu-310.jpg" alt="CU-310" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="product-thumb-placeholder">📅</div></div>
+      <div class="product-info">
+        <div class="color-dots"><span class="color-dot" style="background:#1d1d1f"></span><span class="color-dot" style="background:#5c4033"></span><span class="color-dot" style="background:#2a4a6e"></span><span class="color-more">+3</span></div>
+        <p class="product-ref">CU-310</p><p class="product-name">Agenda ejecutiva 2026 cuero A4</p>
+        <div class="product-price-block"><span class="price-badge">Sin marca</span><p class="product-price">$ 45.000</p></div>
+        <a href="index.html#contacto" class="btn-personalizar">Personalizar</a>
+      </div>
+    </article>
+    <article class="product-card" data-cat="tela" data-price="22000">
+      <div class="product-thumb"><img src="img/products/cu-410.jpg" alt="CU-410" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="product-thumb-placeholder">📒</div></div>
+      <div class="product-info">
+        <div class="color-dots"><span class="color-dot" style="background:#1d1d1f"></span><span class="color-dot" style="background:#e63946"></span><span class="color-dot" style="background:#457b9d"></span><span class="color-dot" style="background:#2a9d8f"></span><span class="color-more">+6</span></div>
+        <p class="product-ref">CU-410</p><p class="product-name">Libreta tela lino A5 con elástico</p>
+        <div class="product-price-block"><span class="price-badge">Sin marca</span><p class="product-price">$ 22.000</p></div>
+        <a href="index.html#contacto" class="btn-personalizar">Personalizar</a>
+      </div>
+    </article>
+    <article class="product-card" data-cat="cuero" data-price="38000">
+      <div class="product-thumb"><img src="img/products/cu-140.jpg" alt="CU-140" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="product-thumb-placeholder">📓</div></div>
+      <div class="product-info">
+        <div class="color-dots"><span class="color-dot" style="background:#1d1d1f"></span><span class="color-dot" style="background:#5c4033"></span><span class="color-dot" style="background:#c0c0c0"></span></div>
+        <p class="product-ref">CU-140</p><p class="product-name">Cuaderno cuero genuino A4 con bolígrafo</p>
+        <div class="product-price-block"><span class="price-badge">Sin marca</span><p class="product-price">$ 38.000</p></div>
+        <a href="index.html#contacto" class="btn-personalizar">Personalizar</a>
+      </div>
+    </article>
+    <article class="product-card" data-cat="bambu" data-price="24000">
+      <div class="product-thumb"><img src="img/products/cu-240.jpg" alt="CU-240" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="product-thumb-placeholder">📔</div></div>
+      <div class="product-info">
+        <div class="color-dots"><span class="color-dot" style="background:#c8a96e"></span><span class="color-dot" style="background:#2a9d8f"></span></div>
+        <p class="product-ref">CU-240</p><p class="product-name">Set ecológico cuaderno + lapicero bambú</p>
+        <div class="product-price-block"><span class="price-badge">Sin marca</span><p class="product-price">$ 24.000</p></div>
+        <a href="index.html#contacto" class="btn-personalizar">Personalizar</a>
+      </div>
+    </article>
+    <article class="product-card" data-cat="agenda" data-price="62000">
+      <div class="product-thumb"><img src="img/products/cu-350.jpg" alt="CU-350" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="product-thumb-placeholder">📅</div></div>
+      <div class="product-info">
+        <div class="color-dots"><span class="color-dot" style="background:#1d1d1f"></span><span class="color-dot" style="background:#5c4033"></span></div>
+        <p class="product-ref">CU-350</p><p class="product-name">Agenda premium 2026 + caja regalo</p>
+        <div class="product-price-block"><span class="price-badge">Sin marca</span><p class="product-price">$ 62.000</p></div>
+        <a href="index.html#contacto" class="btn-personalizar">Personalizar</a>
+      </div>
+    </article>
+    <article class="product-card" data-cat="tela" data-price="16000">
+      <div class="product-thumb"><img src="img/products/cu-430.jpg" alt="CU-430" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="product-thumb-placeholder">📒</div></div>
+      <div class="product-info">
+        <div class="color-dots"><span class="color-dot" style="background:#1d1d1f"></span><span class="color-dot" style="background:#e9c46a"></span><span class="color-dot" style="background:#e63946"></span><span class="color-more">+5</span></div>
+        <p class="product-ref">CU-430</p><p class="product-name">Libreta pocket tela 9×14cm</p>
+        <div class="product-price-block"><span class="price-badge">Sin marca</span><p class="product-price">$ 16.000</p></div>
+        <a href="index.html#contacto" class="btn-personalizar">Personalizar</a>
+      </div>
+    </article>
+  </div>
+  <div class="load-more-wrap"><button class="btn-load-more">Ver más productos</button></div>
+</section>
+<div class="delivery-band">
+  <div class="delivery-item"><span class="delivery-icon">🚚</span><div><strong>Envío a todo el país</strong>Rastreo en tiempo real</div></div>
+  <div class="delivery-item"><span class="delivery-icon">⚡</span><div><strong>Producción express</strong>Desde 7 días hábiles</div></div>
+  <div class="delivery-item"><span class="delivery-icon">🎨</span><div><strong>Debossed & serigrafía</strong>Grabado en relieve</div></div>
+  <div class="delivery-item"><span class="delivery-icon">📦</span><div><strong>Pedido mínimo 50 uds</strong>Con o sin marca</div></div>
+</div>
+<section class="personalize-cta">
+  <h2>¿Listo para personalizar<br>tus cuadernos?</h2>
+  <p>El regalo clásico reinventado con tu marca. Cotiza ahora.</p>
+  <div class="personalize-cta-btns">
+    <a href="index.html#contacto" class="btn-cta-orange">Solicitar cotización</a>
+    <a href="https://wa.me/573000000000" class="btn-cta-ghost">WhatsApp directo</a>
+  </div>
+</section>
+<footer class="footer">
+  <div class="footer-sosumi"><p>Los precios y disponibilidad están sujetos a cambios sin previo aviso.</p></div>
+  <nav class="footer-dir">
+    <div class="footer-col"><h3>Catálogo</h3><ul><li><a href="termos.html">Termos & Vasos</a></li><li><a href="mugs.html">Mugs & Pocillos</a></li><li><a href="gorras.html">Gorras</a></li><li><a href="lapiceros.html">Lapiceros</a></li><li><a href="tulas.html">Tulas & Mochilas</a></li><li><a href="sombrillas.html">Sombrillas</a></li><li><a href="usb.html">USB & Tech</a></li><li><a href="textiles.html">Textiles</a></li><li><a href="cuadernos.html">Cuadernos</a></li><li><a href="kits.html">Kits Corporativos</a></li></ul></div>
+    <div class="footer-col"><h3>Personalización</h3><ul><li><a href="#">Grabado debossed</a></li><li><a href="#">Serigrafía tapa</a></li><li><a href="#">Foil dorado</a></li></ul></div>
+    <div class="footer-col"><h3>Empresa</h3><ul><li><a href="#">Quiénes somos</a></li><li><a href="#">Clientes</a></li><li><a href="#">Contáctanos</a></li></ul></div>
+    <div class="footer-col"><h3>Soporte</h3><ul><li><a href="#">¿Cómo hacer un pedido?</a></li><li><a href="#">Tiempos de producción</a></li><li><a href="#">Preguntas frecuentes</a></li></ul></div>
+  </nav>
+  <div class="footer-bottom"><p>Copyright © 2026 ProMarca. Todos los derechos reservados.</p><div class="footer-legal"><a href="#">Privacidad</a><a href="#">Términos</a></div></div>
+</footer>
+<script>
+  const filterBtns = document.querySelectorAll('.filter-btn'); const cards = document.querySelectorAll('.product-card'); const countEl = document.getElementById('productCount');
+  filterBtns.forEach(btn => { btn.addEventListener('click', () => { filterBtns.forEach(b => b.classList.remove('active')); btn.classList.add('active'); const f = btn.dataset.filter; let v = 0; cards.forEach(c => { const show = f === 'all' || c.dataset.cat === f; c.style.display = show ? '' : 'none'; if (show) v++; }); countEl.textContent = v + ' producto' + (v !== 1 ? 's' : ''); }); });
+  document.getElementById('sortSelect').addEventListener('change', function () { const grid = document.getElementById('productsGrid'); const items = Array.from(grid.querySelectorAll('.product-card')); if (this.value === 'asc') items.sort((a, b) => +a.dataset.price - +b.dataset.price); else if (this.value === 'desc') items.sort((a, b) => +b.dataset.price - +a.dataset.price); else return; items.forEach(i => grid.appendChild(i)); });
+  document.querySelectorAll('.product-thumb img').forEach(img => { if (!img.complete || img.naturalWidth === 0) { img.style.display = 'none'; img.nextElementSibling.style.display = 'flex'; } });
+</script>
+</body>
+</html>

@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Termos & Vasos — ProMarca</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="catalog.css">
+</head>
+<body>
+
+<!-- ─── NAVEGACIÓN ─── -->
+<nav class="nav">
+  <a href="index.html" class="nav-logo"><img src="img/promarca-logo.png" alt="ProMarca" style="height:28px;width:auto;display:block;"></a>
+  <ul class="nav-links">
+    <li><a href="index.html#catalogo" class="active">Catálogo</a></li>
+    <li><a href="index.html#personalizacion">Personalización</a></li>
+    <li><a href="index.html#nosotros">Nosotros</a></li>
+    <li><a href="index.html#contacto">Contacto</a></li>
+  </ul>
+  <div class="nav-actions">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 44">
+      <path d="M14.298,27.202l-3.87-3.87c0.701-0.929,1.122-2.081,1.122-3.332c0-3.06-2.489-5.55-5.55-5.55c-3.06,0-5.55,2.49-5.55,5.55c0,3.061,2.49,5.55,5.55,5.55c1.251,0,2.403-0.421,3.332-1.122l3.87,3.87c0.151,0.151,0.35,0.228,0.548,0.228s0.396-0.076,0.548-0.228C14.601,27.995,14.601,27.505,14.298,27.202z M1.55,20c0-2.454,1.997-4.45,4.45-4.45c2.454,0,4.45,1.997,4.45,4.45S8.454,24.45,6,24.45C3.546,24.45,1.55,22.454,1.55,20z"/>
+    </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 44">
+      <path d="m11.3535 16.0283h-1.0205a3.4229 3.4229 0 0 0 -3.333-2.9648 3.4229 3.4229 0 0 0 -3.333 2.9648h-1.02a2.1184 2.1184 0 0 0 -2.117 2.1162v7.7155a2.1186 2.1186 0 0 0 2.1162 2.1167h8.707a2.1186 2.1186 0 0 0 2.1168-2.1167v-7.7155a2.1184 2.1184 0 0 0 -2.1165-2.1162zm-4.3535-1.8652a2.3169 2.3169 0 0 1 2.2222 1.8652h-4.4444a2.3169 2.3169 0 0 1 2.2222-1.8652zm5.37 11.6969a1.0182 1.0182 0 0 1 -1.0166 1.0171h-8.7069a1.0182 1.0182 0 0 1 -1.0165-1.0171v-7.7155a1.0178 1.0178 0 0 1 1.0166-1.0166h8.707a1.0178 1.0178 0 0 1 1.0164 1.0166z"/>
+    </svg>
+  </div>
+</nav>
+
+<!-- ─── HERO DE CATEGORÍA ─── -->
+<section class="cat-hero">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="index.html">Inicio</a>
+    <span class="sep">/</span>
+    <a href="index.html#catalogo">Catálogo</a>
+    <span class="sep">/</span>
+    <span>Termos & Vasos</span>
+  </nav>
+  <p class="cat-hero-eyebrow">Catálogo 2026</p>
+  <h1 class="cat-hero-title">Termos & Vasos</h1>
+  <p class="cat-hero-sub">Hidratación con tu marca. Productos de alta durabilidad en acero inoxidable, plástico y aluminio para toda ocasión corporativa.</p>
+  <div class="cat-hero-stats">
+    <div class="cat-stat">
+      <div class="cat-stat-num">42</div>
+      <div class="cat-stat-label">Productos</div>
+    </div>
+    <div class="cat-stat">
+      <div class="cat-stat-num">3</div>
+      <div class="cat-stat-label">Materiales</div>
+    </div>
+    <div class="cat-stat">
+      <div class="cat-stat-num">+15</div>
+      <div class="cat-stat-label">Colores</div>
+    </div>
+    <div class="cat-stat">
+      <div class="cat-stat-num">500ml–1L</div>
+      <div class="cat-stat-label">Capacidades</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FILTROS ─── -->
+<div class="filter-bar" id="filtros">
+  <button class="filter-btn active" data-filter="all">Todos</button>
+  <button class="filter-btn" data-filter="acero">Acero inox</button>
+  <button class="filter-btn" data-filter="plastico">Plástico</button>
+  <button class="filter-btn" data-filter="aluminio">Aluminio</button>
+  <div class="filter-sep"></div>
+  <select class="filter-sort" id="sortSelect">
+    <option value="default">Ordenar por</option>
+    <option value="asc">Menor precio</option>
+    <option value="desc">Mayor precio</option>
+  </select>
+</div>
+
+<!-- ─── GRID DE PRODUCTOS ─── -->
+<section class="products-section">
+  <p class="section-count" id="productCount">42 productos</p>
+
+  <div class="products-grid" id="productsGrid">
+
+    <!-- MU-321 -->
+    <article class="product-card" data-cat="acero" data-price="31311">
+      <div class="product-thumb">
+        <img src="img/products/mu-321.jpg" alt="Termo MU-321" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="product-thumb-placeholder">🥤</div>
+      </div>
+      <div class="product-info">
+        <div class="color-dots">
+          <span class="color-dot" style="background:#1d1d1f" title="Negro"></span>
+          <span class="color-dot" style="background:#e63946" title="Rojo"></span>
+          <span class="color-dot" style="background:#457b9d" title="Azul"></span>
+          <span class="color-dot" style="background:#2a9d8f" title="Verde"></span>
+          <span class="color-dot" style="background:#e9c46a" title="Amarillo"></span>
+          <span class="color-more">+3</span>
+        </div>
+        <p class="product-ref">MU-321</p>
+        <p class="product-name">Termo acero inox con asa</p>
+        <div class="product-price-block">
+          <span class="price-badge">Sin marca</span>
+          <p class="product-price">$ 31.311</p>
+        </div>
+        <a href="index.html#contacto" class="btn-personalizar">Personalizar</a>
+      </div>
+    </article>
+
+    <!-- MU-304 -->
+    <article class="product-card" data-cat="plastico" data-price="10629">
+      <div class="product-thumb">
+        <img src="img/products/mu-304.jpg" alt="Termo MU-304" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="product-thumb-placeholder">🥤</div>
+      </div>
+      <div class="product-info">
+        <div class="color-dots">
+          <span class="color-dot" style="background:#e63946" title="Rojo"></span>
+          <span class="color-dot" style="background:#457b9d" title="Azul"></span>
+          <span class="color-dot" style="background:#2a9d8f" title="Verde"></span>
+          <span class="color-dot" style="background:#e9c46a" title="Amarillo"></span>
+          <span class="color-dot" style="background:#ff6b1a" title="Naranja"></span>
+          <span class="color-more">+5</span>
+        </div>
+        <p class="product-ref">MU-304</p>
+        <p class="product-name">Botella deportiva plástico</p>
+        <div class="product-price-block">
+          <span class="price-badge">Sin marca</span>
+          <p class="product-price">$ 10.629</p>
+        </div>
+        <a href="index.html#contacto" class="btn-personalizar">Personalizar</a>
+      </div>
+    </article>
+
+    <!-- MU-337 -->
+    <article class="product-card" data-cat="plastico" data-price="9791">
+      <div class="product-thumb">
+        <img src="img/products/mu-337.jpg" alt="Termo MU-337" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="product-thumb-placeholder">🥤</div>
+      </div>
+      <div class="product-info">
+        <div class="color-dots">
+          <span class="color-dot" style="background:#1d1d1f" title="Negro"></span>
+          <span class="color-dot" style="background:#fff" style="border:1px solid #ccc" title="Blanco"></span>
+          <span class="color-dot" style="background:#e63946" title="Rojo"></span>
+          <span class="color-dot" style="background:#457b9d" title="Azul"></span>
+          <span class="color-more">+4</span>
+        </div>
+        <p class="product-ref">MU-337</p>
+        <p class="product-name">Botella sport con tapa flip</p>
+        <div class="product-price-block">
+          <span class="price-badge">Sin marca</span>
+          <p class="product-price">$ 9.791</p>
+        </div>
+        <a href="index.html#contacto" class="btn-personalizar">Personalizar</a>
+      </div>
+    </article>
+
+    <!-- MU-349 -->
+    <article class="product-card" data-cat="acero" data-price="40830">
+      <div class="product-thumb">
+        <img src="img/products/mu-349.jpg" alt="Termo MU-349" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="product-thumb-placeholder">🥤</div>
+      </div>
+      <div class="product-info">
+        <div class="color-dots">
+          <span class="color-dot" style="background:#1d1d1f" title="Negro"></span>
+          <span class="color-dot" style="background:#888" title="Gris"></span>
+          <span class="color-dot" style="background:#c0c0c0" title="Plata"></span>
+          <span class="color-dot" style="background:#457b9d" title="Azul"></span>
+          <span class="color-more">+2</span>
+        </div>
+        <p class="product-ref">MU-349</p>
+        <p class="product-name">Termo premium acero 750ml</p>
+        <div class="product-price-block">
+          <span class="price-badge">Sin marca</span>
+          <p class="product-price">$ 40.830</p>
+        </div>
+        <a href="index.html#contacto" class="btn-personalizar">Personalizar</a>
+      </div>
+    </article>
+
+    <!-- MU-444 -->
+    <article class="product-card" data-cat="acero" data-price="77388">
+      <div class="product-thumb">
+        <img src="img/products/mu-444.jpg" alt="Termo MU-444" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="product-thumb-placeholder">🥤</div>
+      </div>
+      <div class="product-info">
+        <div class="color-dots">
+          <span class="color-dot" style="background:#1d1d1f" title="Negro"></span>
+          <span class="color-dot" style="background:#c0c0c0" title="Plata"></span>
+          <span class="color-dot" style="background:#e63946" title="Rojo"></span>
+          <span class="color-more">+3</span>
+        </div>
+        <p class="product-ref">MU-444</p>
+        <p class="product-name">Termo Stanley acero 1L</p>
+        <div class="product-price-block">
+          <span class="price-badge">Sin marca</span>
+          <p class="product-price">$ 77.388</p>
+        </div>
+        <a href="index.html#contacto" class="btn-personalizar">Personalizar</a>
+      </div>
+    </article>
+
+    <!-- MU-411 -->
+    <article class="product-card" data-cat="acero" data-price="29217">
+      <div class="product-thumb">
+        <img src="img/products/mu-411.jpg" alt="Termo MU-411" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="product-thumb-placeholder">🥤</div>
+      </div>
+      <div class="product-info">
+        <div class="color-dots">
+          <span class="color-dot" style="background:#1d1d1f" title="Negro"></span>
+          <span class="color-dot" style="background:#fff" title="Blanco"></span>
+          <span class="color-dot" style="background:#457b9d" title="Azul marino"></span>
+          <span class="color-dot" style="background:#2a9d8f" title="Verde menta"></span>
+          <span class="color-more">+4</span>
+        </div>
+        <p class="product-ref">MU-411</p>
+        <p class="product-name">Termo slim acero 500ml</p>
+        <div class="product-price-block">
+          <span class="price-badge">Sin marca</span>
+          <p class="product-price">$ 29.217</p>
+        </div>
+        <a href="index.html#contacto" class="btn-personalizar">Personalizar</a>
+      </div>
+    </article>
+
+    <!-- ── Productos adicionales (placeholder — reemplaza con datos reales) ── -->
+
+    <article class="product-card" data-cat="aluminio" data-price="18500">
+      <div class="product-thumb">
+        <img src="img/products/mu-201.jpg" alt="Termo MU-201" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="product-thumb-placeholder">🥤</div>
+      </div>
+      <div class="product-info">
+        <div class="color-dots">
+          <span class="color-dot" style="background:#e63946"></span>
+          <span class="color-dot" style="background:#457b9d"></span>
+          <span class="color-dot" style="background:#2a9d8f"></span>
+          <span class="color-dot" style="background:#ff6b1a"></span>
+          <span class="color-more">+4</span>
+        </div>
+        <p class="product-ref">MU-201</p>
+        <p class="product-name">Botella aluminio 600ml</p>
+        <div class="product-price-block">
+          <span class="price-badge">Sin marca</span>
+          <p class="product-price">$ 18.500</p>
+        </div>
+        <a href="index.html#contacto" class="btn-personalizar">Personalizar</a>
+      </div>
+    </article>
+
+    <article class="product-card" data-cat="plastico" data-price="7800">
+      <div class="product-thumb">
+        <img src="img/products/mu-115.jpg" alt="Termo MU-115" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="product-thumb-placeholder">🥤</div>
+      </div>
+      <div class="product-info">
+        <div class="color-dots">
+          <span class="color-dot" style="background:#1d1d1f"></span>
+          <span class="color-dot" style="background:#e63946"></span>
+          <span class="color-dot" style="background:#e9c46a"></span>
+          <span class="color-dot" style="background:#2a9d8f"></span>
+          <span class="color-more">+6</span>
+        </div>
+        <p class="product-ref">MU-115</p>
+        <p class="product-name">Vaso con tapa plástico 400ml</p>
+        <div class="product-price-block">
+          <span class="price-badge">Sin marca</span>
+          <p class="product-price">$ 7.800</p>
+        </div>
+        <a href="index.html#contacto" class="btn-personalizar">Personalizar</a>
+      </div>
+    </article>
+
+    <article class="product-card" data-cat="acero" data-price="52000">
+      <div class="product-thumb">
+        <img src="img/products/mu-512.jpg" alt="Termo MU-512" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="product-thumb-placeholder">🥤</div>
+      </div>
+      <div class="product-info">
+        <div class="color-dots">
+          <span class="color-dot" style="background:#1d1d1f"></span>
+          <span class="color-dot" style="background:#c0c0c0"></span>
+          <span class="color-dot" style="background:#b5451b"></span>
+          <span class="color-more">+2</span>
+        </div>
+        <p class="product-ref">MU-512</p>
+        <p class="product-name">Termo wide mouth acero 1L</p>
+        <div class="product-price-block">
+          <span class="price-badge">Sin marca</span>
+          <p class="product-price">$ 52.000</p>
+        </div>
+        <a href="index.html#contacto" class="btn-personalizar">Personalizar</a>
+      </div>
+    </article>
+
+    <article class="product-card" data-cat="plastico" data-price="12400">
+      <div class="product-thumb">
+        <img src="img/products/mu-278.jpg" alt="Termo MU-278" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="product-thumb-placeholder">🥤</div>
+      </div>
+      <div class="product-info">
+        <div class="color-dots">
+          <span class="color-dot" style="background:#1d1d1f"></span>
+          <span class="color-dot" style="background:#fff"></span>
+          <span class="color-dot" style="background:#457b9d"></span>
+          <span class="color-dot" style="background:#e63946"></span>
+          <span class="color-more">+5</span>
+        </div>
+        <p class="product-ref">MU-278</p>
+        <p class="product-name">Botella con infusor 650ml</p>
+        <div class="product-price-block">
+          <span class="price-badge">Sin marca</span>
+          <p class="product-price">$ 12.400</p>
+        </div>
+        <a href="index.html#contacto" class="btn-personalizar">Personalizar</a>
+      </div>
+    </article>
+
+    <article class="product-card" data-cat="acero" data-price="35600">
+      <div class="product-thumb">
+        <img src="img/products/mu-388.jpg" alt="Termo MU-388" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="product-thumb-placeholder">🥤</div>
+      </div>
+      <div class="product-info">
+        <div class="color-dots">
+          <span class="color-dot" style="background:#1d1d1f"></span>
+          <span class="color-dot" style="background:#c0c0c0"></span>
+          <span class="color-dot" style="background:#457b9d"></span>
+          <span class="color-more">+3</span>
+        </div>
+        <p class="product-ref">MU-388</p>
+        <p class="product-name">Termo doble pared 600ml</p>
+        <div class="product-price-block">
+          <span class="price-badge">Sin marca</span>
+          <p class="product-price">$ 35.600</p>
+        </div>
+        <a href="index.html#contacto" class="btn-personalizar">Personalizar</a>
+      </div>
+    </article>
+
+    <article class="product-card" data-cat="aluminio" data-price="22000">
+      <div class="product-thumb">
+        <img src="img/products/mu-233.jpg" alt="Termo MU-233" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="product-thumb-placeholder">🥤</div>
+      </div>
+      <div class="product-info">
+        <div class="color-dots">
+          <span class="color-dot" style="background:#1d1d1f"></span>
+          <span class="color-dot" style="background:#e63946"></span>
+          <span class="color-dot" style="background:#2a9d8f"></span>
+          <span class="color-dot" style="background:#e9c46a"></span>
+          <span class="color-more">+3</span>
+        </div>
+        <p class="product-ref">MU-233</p>
+        <p class="product-name">Botella aluminio twist 500ml</p>
+        <div class="product-price-block">
+          <span class="price-badge">Sin marca</span>
+          <p class="product-price">$ 22.000</p>
+        </div>
+        <a href="index.html#contacto" class="btn-personalizar">Personalizar</a>
+      </div>
+    </article>
+
+  </div><!-- /products-grid -->
+
+  <div class="load-more-wrap">
+    <button class="btn-load-more">Ver más productos</button>
+  </div>
+</section>
+
+<!-- ─── BANDA DE ENTREGA ─── -->
+<div class="delivery-band">
+  <div class="delivery-item">
+    <span class="delivery-icon">🚚</span>
+    <div>
+      <strong>Envío a todo el país</strong>
+      Rastreo en tiempo real
+    </div>
+  </div>
+  <div class="delivery-item">
+    <span class="delivery-icon">⚡</span>
+    <div>
+      <strong>Producción express</strong>
+      Desde 5 días hábiles
+    </div>
+  </div>
+  <div class="delivery-item">
+    <span class="delivery-icon">🎨</span>
+    <div>
+      <strong>Personalización total</strong>
+      Serigrafía, grabado láser, UV
+    </div>
+  </div>
+  <div class="delivery-item">
+    <span class="delivery-icon">📦</span>
+    <div>
+      <strong>Pedido mínimo 50 uds</strong>
+      Desde 100 con marca
+    </div>
+  </div>
+</div>
+
+<!-- ─── CTA PERSONALIZACIÓN ─── -->
+<section class="personalize-cta">
+  <h2>¿Listo para personalizar<br>tus termos?</h2>
+  <p>Cuéntanos cuántas unidades necesitas y recibe tu cotización en menos de 24 horas.</p>
+  <div class="personalize-cta-btns">
+    <a href="index.html#contacto" class="btn-cta-orange">Solicitar cotización</a>
+    <a href="https://wa.me/573000000000" class="btn-cta-ghost">WhatsApp directo</a>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer class="footer">
+  <div class="footer-sosumi">
+    <p>Los precios y disponibilidad están sujetos a cambios sin previo aviso. Los pedidos mínimos varían según el producto. Consulta a nuestro equipo para condiciones especiales en grandes volúmenes.</p>
+  </div>
+  <nav class="footer-dir">
+    <div class="footer-col">
+      <h3>Catálogo</h3>
+      <ul>
+        <li><a href="termos.html">Termos & Vasos</a></li>
+        <li><a href="mugs.html">Mugs & Pocillos</a></li>
+        <li><a href="gorras.html">Gorras</a></li>
+        <li><a href="lapiceros.html">Lapiceros</a></li>
+        <li><a href="tulas.html">Tulas & Mochilas</a></li>
+        <li><a href="sombrillas.html">Sombrillas</a></li>
+        <li><a href="usb.html">USB & Tech</a></li>
+        <li><a href="textiles.html">Textiles</a></li>
+        <li><a href="cuadernos.html">Cuadernos</a></li>
+        <li><a href="kits.html">Kits Corporativos</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3>Personalización</h3>
+      <ul>
+        <li><a href="#">Serigrafía</a></li>
+        <li><a href="#">Grabado láser</a></li>
+        <li><a href="#">Impresión UV</a></li>
+        <li><a href="#">Bordado</a></li>
+        <li><a href="#">Guía de arte</a></li>
+        <li><a href="#">Colores Pantone</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3>Empresa</h3>
+      <ul>
+        <li><a href="#">Quiénes somos</a></li>
+        <li><a href="#">Clientes</a></li>
+        <li><a href="#">Casos de éxito</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Contáctanos</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3>Soporte</h3>
+      <ul>
+        <li><a href="#">¿Cómo hacer un pedido?</a></li>
+        <li><a href="#">Tiempos de producción</a></li>
+        <li><a href="#">Preguntas frecuentes</a></li>
+        <li><a href="#">Estado de mi pedido</a></li>
+        <li><a href="#">Política de cambios</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="footer-bottom">
+    <p>Copyright © 2026 ProMarca. Todos los derechos reservados.</p>
+    <div class="footer-legal">
+      <a href="#">Privacidad</a>
+      <a href="#">Términos</a>
+      <a href="#">Sitemap</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── Filter by category ──
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const cards      = document.querySelectorAll('.product-card');
+  const countEl    = document.getElementById('productCount');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      let visible = 0;
+      cards.forEach(card => {
+        const show = f === 'all' || card.dataset.cat === f;
+        card.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+      countEl.textContent = visible + ' producto' + (visible !== 1 ? 's' : '');
+    });
+  });
+
+  // ── Sort by price ──
+  document.getElementById('sortSelect').addEventListener('change', function () {
+    const grid  = document.getElementById('productsGrid');
+    const items = Array.from(grid.querySelectorAll('.product-card'));
+    if (this.value === 'asc') {
+      items.sort((a, b) => +a.dataset.price - +b.dataset.price);
+    } else if (this.value === 'desc') {
+      items.sort((a, b) => +b.dataset.price - +a.dataset.price);
+    } else return;
+    items.forEach(item => grid.appendChild(item));
+  });
+
+  // ── Show placeholder if image missing ──
+  document.querySelectorAll('.product-thumb img').forEach(img => {
+    if (!img.complete || img.naturalWidth === 0) {
+      img.style.display = 'none';
+      img.nextElementSibling.style.display = 'flex';
+    }
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ProMarca — Productos Promocionales</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --nav-h: 48px;
+      --orange: #FF6B1A;
+      --orange-d: #E85A0A;
+      --text: #1d1d1f;
+      --text-sec: #6e6e73;
+      --bg: #ffffff;
+      --bg-gray: #f5f5f7;
+      --border: #d2d2d7;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ─── NAVIGATION ─── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      height: var(--nav-h);
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 22px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+    }
+    .nav-logo img { height: 28px; width: auto; display: block; }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--text);
+      opacity: 0.85;
+      transition: opacity .2s;
+    }
+    .nav-links a:hover { opacity: 1; }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .nav-actions svg {
+      width: 15px;
+      height: 44px;
+      cursor: pointer;
+      fill: var(--text);
+      opacity: 0.85;
+      transition: opacity .2s;
+    }
+    .nav-actions svg:hover { opacity: 1; }
+
+    /* ─── HERO SECTIONS ─── */
+    .hero {
+      min-height: 88vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 72px;
+      text-align: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero.dark {
+      background: #000;
+      color: #f5f5f7;
+    }
+    .hero.light { background: var(--bg); }
+    .hero.gray  { background: var(--bg-gray); }
+
+    .hero-eyebrow {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--orange);
+      margin-bottom: 12px;
+      letter-spacing: 0.01em;
+    }
+    .hero.dark .hero-eyebrow { color: #ff9d60; }
+
+    .hero-title {
+      font-size: clamp(42px, 8vw, 80px);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      max-width: 860px;
+    }
+    .hero.dark .hero-title { color: #f5f5f7; }
+
+    .hero-sub {
+      font-size: clamp(17px, 2.5vw, 22px);
+      font-weight: 400;
+      color: var(--text-sec);
+      margin-top: 16px;
+      max-width: 560px;
+      line-height: 1.5;
+    }
+    .hero.dark .hero-sub { color: #a1a1a6; }
+
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 17px;
+      font-weight: 400;
+      padding: 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: opacity .15s;
+    }
+    .btn-primary { color: #0071e3; }
+    .btn-primary:hover { opacity: 0.7; }
+    .btn-primary::after { content: '›'; font-size: 20px; }
+
+    .btn-secondary {
+      color: var(--text-sec);
+      border-bottom: 1px solid currentColor;
+      padding-bottom: 1px;
+    }
+    .hero.dark .btn-primary { color: #2997ff; }
+    .hero.dark .btn-secondary { color: #86868b; }
+
+    .hero-image {
+      margin-top: 36px;
+      width: 100%;
+      max-width: 900px;
+      padding: 0 24px;
+    }
+    .hero-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+
+    /* ─── HERO CAROUSEL ─── */
+    .hero-carousel {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .hero-carousel .slide {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1.2s ease-in-out;
+      will-change: opacity;
+    }
+    .hero-carousel .slide.active { opacity: 1; }
+    /* Gradient overlay so text stays legible */
+    .hero-carousel::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.52) 0%, rgba(0,0,0,0.38) 60%, rgba(0,0,0,0.62) 100%);
+      z-index: 1;
+    }
+    /* Keep text and CTAs above the carousel */
+    .hero > *:not(.hero-carousel) {
+      position: relative;
+      z-index: 2;
+    }
+    /* Carousel dot indicators */
+    .carousel-dots {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      gap: 8px;
+      margin-top: 32px;
+    }
+    .carousel-dots .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.4);
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: background .3s, transform .3s;
+    }
+    .carousel-dots .dot.active {
+      background: #fff;
+      transform: scale(1.3);
+    }
+
+    /* ─── PLACEHOLDER MOSAIC (second hero only) ─── */
+    .hero-mosaic {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      max-width: 700px;
+      width: 100%;
+      padding: 0 24px;
+    }
+    .hero-mosaic .tile {
+      border-radius: 10px;
+      aspect-ratio: 1;
+      background: linear-gradient(135deg, #ff9d60 0%, #ff6b1a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+    }
+    .hero-mosaic .tile:nth-child(2) { background: linear-gradient(135deg, #1d1d1f 0%, #3d3d3f 100%); }
+    .hero-mosaic .tile:nth-child(3) { background: linear-gradient(135deg, #e3f0ff 0%, #2997ff 100%); }
+    .hero-mosaic .tile:nth-child(4) { background: linear-gradient(135deg, #e3f0ff 0%, #34c759 100%); }
+    .hero-mosaic .tile:nth-child(5) { background: linear-gradient(135deg, #fff3e0 0%, #ffcc00 100%); }
+    .hero-mosaic .tile:nth-child(6) { background: linear-gradient(135deg, #ffe0e0 0%, #ff3b30 100%); }
+
+    /* ─── PROMO GRID ─── */
+    .promo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: #d2d2d7;
+    }
+    @media (max-width: 740px) {
+      .promo-grid { grid-template-columns: 1fr; }
+    }
+
+    .promo-card {
+      background: var(--bg-gray);
+      min-height: 400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 44px 24px 0;
+      text-align: center;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+    .promo-card.dark-card {
+      background: #1d1d1f;
+      color: #f5f5f7;
+    }
+
+    .promo-eyebrow {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--orange);
+      letter-spacing: 0.02em;
+      margin-bottom: 8px;
+    }
+    .dark-card .promo-eyebrow { color: #ff9d60; }
+
+    .promo-title {
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .dark-card .promo-title { color: #f5f5f7; }
+
+    .promo-sub {
+      font-size: 14px;
+      color: var(--text-sec);
+      margin-top: 8px;
+      line-height: 1.5;
+      max-width: 300px;
+    }
+    .dark-card .promo-sub { color: #86868b; }
+
+    .promo-links {
+      display: flex;
+      gap: 16px;
+      margin-top: 12px;
+      font-size: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .promo-links a { color: #0071e3; transition: opacity .15s; }
+    .promo-links a:hover { opacity: 0.7; }
+    .promo-links a::after { content: ' ›'; }
+    .dark-card .promo-links a { color: #2997ff; }
+
+    .promo-visual {
+      margin-top: 28px;
+      font-size: 88px;
+      line-height: 1;
+      filter: drop-shadow(0 12px 24px rgba(0,0,0,0.15));
+    }
+
+    /* ─── CATEGORY BAR ─── */
+    .category-section {
+      padding: 80px 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--orange);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+    }
+    .section-sub {
+      font-size: 17px;
+      color: var(--text-sec);
+      margin-top: 12px;
+      line-height: 1.5;
+    }
+
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .cat-card {
+      background: var(--bg-gray);
+      border-radius: 18px;
+      padding: 32px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .cat-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+    .cat-icon { font-size: 42px; margin-bottom: 14px; }
+    .cat-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .cat-count {
+      font-size: 12px;
+      color: var(--text-sec);
+    }
+    .cat-cta {
+      font-size: 13px;
+      color: #0071e3;
+      margin-top: 10px;
+      display: block;
+    }
+    .cat-cta::after { content: ' ›'; }
+
+    /* ─── FEATURE ROW ─── */
+    .feature-section { background: var(--bg-gray); padding: 80px 0; }
+    .feature-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    @media (max-width: 740px) {
+      .feature-inner { grid-template-columns: 1fr; gap: 32px; }
+    }
+    .feature-inner.reverse { direction: rtl; }
+    .feature-inner.reverse > * { direction: ltr; }
+
+    .feature-text .label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--orange);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .feature-text h2 {
+      font-size: clamp(26px, 3.5vw, 42px);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+    }
+    .feature-text p {
+      font-size: 16px;
+      color: var(--text-sec);
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+    .feature-text .btn { font-size: 15px; }
+
+    .feature-visual {
+      background: linear-gradient(135deg, #1d1d1f 0%, #2c2c2e 100%);
+      border-radius: 20px;
+      aspect-ratio: 4/3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 100px;
+      filter: drop-shadow(0 20px 40px rgba(0,0,0,0.2));
+    }
+
+    /* ─── STATS BAND ─── */
+    .stats-band {
+      background: #000;
+      color: #f5f5f7;
+      padding: 64px 24px;
+    }
+    .stats-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      text-align: center;
+    }
+    @media (max-width: 600px) {
+      .stats-inner { grid-template-columns: 1fr; }
+    }
+    .stat-num {
+      font-size: clamp(36px, 6vw, 56px);
+      font-weight: 700;
+      color: var(--orange);
+      letter-spacing: -0.02em;
+    }
+    .stat-label {
+      font-size: 14px;
+      color: #a1a1a6;
+      margin-top: 6px;
+      line-height: 1.4;
+    }
+
+    /* ─── TESTIMONIALS ─── */
+    /* ─── CLIENTS MARQUEE ─── */
+    .clients-section {
+      padding: 56px 0;
+      background: var(--bg-gray);
+      text-align: center;
+      overflow: hidden;
+    }
+    .clients-track-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+    .clients-fade {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 120px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .clients-fade--left  { left:  0; background: linear-gradient(to right,  var(--bg-gray), transparent); }
+    .clients-fade--right { right: 0; background: linear-gradient(to left, var(--bg-gray), transparent); }
+
+    .clients-track {
+      display: flex;
+      width: max-content;
+      animation: clientsScroll 28s linear infinite;
+    }
+    .clients-track:hover { animation-play-state: paused; }
+
+    @keyframes clientsScroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .clients-list {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      flex-shrink: 0;
+    }
+
+    .client-logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 44px;
+      height: 72px;
+      flex-shrink: 0;
+      transition: opacity .2s;
+    }
+    .client-logo:hover { opacity: 0.7; }
+    .client-logo img {
+      height: 44px;
+      width: auto;
+      max-width: 160px;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* ─── TESTIMONIAL ─── */
+    .testimonial-section {
+      padding: 80px 24px;
+      background: var(--bg);
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .quote {
+      font-size: clamp(18px, 2.5vw, 24px);
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--text);
+      font-style: italic;
+      max-width: 720px;
+      margin: 0 auto 20px;
+    }
+    .quote-author {
+      font-size: 13px;
+      color: var(--text-sec);
+      font-weight: 500;
+    }
+    .quote-author strong { color: var(--text); }
+
+    /* ─── CTA BAND ─── */
+    .cta-band {
+      background: linear-gradient(135deg, #ff6b1a 0%, #e85a0a 100%);
+      color: white;
+      text-align: center;
+      padding: 80px 24px;
+    }
+    .cta-band h2 {
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+    }
+    .cta-band p {
+      font-size: 18px;
+      opacity: 0.85;
+      margin-bottom: 32px;
+    }
+    .btn-white {
+      display: inline-block;
+      background: #fff;
+      color: var(--orange);
+      font-size: 16px;
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: 980px;
+      transition: opacity .15s;
+    }
+    .btn-white:hover { opacity: 0.85; }
+
+    .btn-outline-white {
+      display: inline-block;
+      border: 1px solid rgba(255,255,255,0.6);
+      color: white;
+      font-size: 16px;
+      font-weight: 500;
+      padding: 13px 28px;
+      border-radius: 980px;
+      margin-left: 12px;
+      transition: background .15s;
+    }
+    .btn-outline-white:hover { background: rgba(255,255,255,0.1); }
+
+    /* ─── FOOTER ─── */
+    .footer-sosumi {
+      background: var(--bg-gray);
+      border-top: 1px solid var(--border);
+      padding: 16px 22px;
+      font-size: 12px;
+      color: var(--text-sec);
+      line-height: 1.6;
+    }
+
+    .footer {
+      background: var(--bg-gray);
+      border-top: 1px solid var(--border);
+    }
+    .footer-dir {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 22px 24px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+    }
+    @media (max-width: 740px) {
+      .footer-dir { grid-template-columns: 1fr 1fr; }
+      .nav-links { display: none; }
+    }
+    .footer-col h3 {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a {
+      font-size: 12px;
+      color: var(--text-sec);
+      transition: color .15s;
+    }
+    .footer-col a:hover { color: var(--text); }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding: 16px 22px;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .footer-bottom p { font-size: 12px; color: var(--text-sec); }
+    .footer-legal {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .footer-legal a { font-size: 12px; color: var(--text-sec); transition: color .15s; }
+    .footer-legal a:hover { color: var(--text); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 480px) {
+      .hero { min-height: 70vh; padding-top: 48px; }
+      .promo-card { min-height: 320px; padding-top: 32px; }
+      .promo-visual { font-size: 60px; }
+      .hero-mosaic { grid-template-columns: repeat(2,1fr); }
+      .hero-mosaic .tile:last-child { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     NAVEGACIÓN
+═══════════════════════════════════════════ -->
+<nav class="nav">
+  <a href="#" class="nav-logo"><img src="img/promarca-logo.png" alt="ProMarca" style="height:28px;width:auto;display:block;"></a>
+  <ul class="nav-links">
+    <li><a href="#catalogo">Catálogo</a></li>
+    <li><a href="#personalizacion">Personalización</a></li>
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <div class="nav-actions">
+    <!-- search -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 44">
+      <path d="M14.298,27.202l-3.87-3.87c0.701-0.929,1.122-2.081,1.122-3.332c0-3.06-2.489-5.55-5.55-5.55c-3.06,0-5.55,2.49-5.55,5.55c0,3.061,2.49,5.55,5.55,5.55c1.251,0,2.403-0.421,3.332-1.122l3.87,3.87c0.151,0.151,0.35,0.228,0.548,0.228s0.396-0.076,0.548-0.228C14.601,27.995,14.601,27.505,14.298,27.202z M1.55,20c0-2.454,1.997-4.45,4.45-4.45c2.454,0,4.45,1.997,4.45,4.45S8.454,24.45,6,24.45C3.546,24.45,1.55,22.454,1.55,20z"/>
+    </svg>
+    <!-- bag -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 44">
+      <path d="m11.3535 16.0283h-1.0205a3.4229 3.4229 0 0 0 -3.333-2.9648 3.4229 3.4229 0 0 0 -3.333 2.9648h-1.02a2.1184 2.1184 0 0 0 -2.117 2.1162v7.7155a2.1186 2.1186 0 0 0 2.1162 2.1167h8.707a2.1186 2.1186 0 0 0 2.1168-2.1167v-7.7155a2.1184 2.1184 0 0 0 -2.1165-2.1162zm-4.3535-1.8652a2.3169 2.3169 0 0 1 2.2222 1.8652h-4.4444a2.3169 2.3169 0 0 1 2.2222-1.8652zm5.37 11.6969a1.0182 1.0182 0 0 1 -1.0166 1.0171h-8.7069a1.0182 1.0182 0 0 1 -1.0165-1.0171v-7.7155a1.0178 1.0178 0 0 1 1.0166-1.0166h8.707a1.0178 1.0178 0 0 1 1.0164 1.0166z"/>
+    </svg>
+  </div>
+</nav>
+
+
+<!-- ═══════════════════════════════════════════
+     HERO 1 — PRINCIPAL (oscuro)
+═══════════════════════════════════════════ -->
+<section class="hero dark" id="inicio">
+  <p class="hero-eyebrow">Nuevos productos 2026</p>
+  <h1 class="hero-title">Tu marca.<br>En cada detalle.</h1>
+  <p class="hero-sub">Productos promocionales que generan recordación duradera. Personalizados para tu empresa.</p>
+  <div class="hero-ctas">
+    <a href="#catalogo" class="btn btn-primary">Ver catálogo</a>
+    <a href="#personalizacion" class="btn btn-secondary" style="color:#86868b; border-bottom:1px solid #86868b;">Cómo personalizar</a>
+  </div>
+  <!-- Carousel de fondo — reemplaza cada slide con tu imagen real -->
+  <div class="hero-carousel" aria-hidden="true">
+    <div class="slide active" style="background-image:url('img/slide-1.jpg'); background-color:#2a1a0e;"></div>
+    <div class="slide"        style="background-image:url('img/slide-2.jpg'); background-color:#0d1a2a;"></div>
+    <div class="slide"        style="background-image:url('img/slide-3.jpg'); background-color:#1a0d2a;"></div>
+    <div class="slide"        style="background-image:url('img/slide-4.jpg'); background-color:#0d2a1a;"></div>
+    <div class="slide"        style="background-image:url('img/slide-5.jpg'); background-color:#2a1a0d;"></div>
+  </div>
+  <div class="carousel-dots">
+    <button class="dot active" aria-label="Slide 1"></button>
+    <button class="dot"        aria-label="Slide 2"></button>
+    <button class="dot"        aria-label="Slide 3"></button>
+    <button class="dot"        aria-label="Slide 4"></button>
+    <button class="dot"        aria-label="Slide 5"></button>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     CLIENTES — carrusel auto-scroll
+═══════════════════════════════════════════ -->
+<section class="clients-section">
+  <p class="section-label" style="margin-bottom:28px;">Nuestros clientes</p>
+  <div class="clients-track-wrap">
+    <div class="clients-fade clients-fade--left"></div>
+    <div class="clients-fade clients-fade--right"></div>
+    <div class="clients-track" id="clientsTrack">
+      <div class="clients-list">
+        <div class="client-logo"><img src="img/clientes/ecoimagen.png"        alt="Ecoimagen Salud"></div>
+        <div class="client-logo"><img src="img/clientes/viviendas.png"        alt="Viviendas y Valores"></div>
+        <div class="client-logo"><img src="img/clientes/colpatria.png"        alt="Colpatria"></div>
+        <div class="client-logo"><img src="img/clientes/cens.png"             alt="CENS"></div>
+        <div class="client-logo"><img src="img/clientes/sura.png"             alt="Sura"></div>
+        <div class="client-logo"><img src="img/clientes/american-airlines.png" alt="American Airlines"></div>
+        <div class="client-logo"><img src="img/clientes/oracle.png"           alt="Oracle"></div>
+        <div class="client-logo"><img src="img/clientes/aseo-urbano.png"      alt="Aseo Urbano"></div>
+        <div class="client-logo"><img src="img/clientes/jetblue.png"          alt="JetBlue"></div>
+        <div class="client-logo"><img src="img/clientes/elvecino.png"         alt="El Vecino"></div>
+        <div class="client-logo"><img src="img/clientes/del-corazon.png"      alt="Servicios del Corazón"></div>
+      </div>
+      <div class="clients-list" aria-hidden="true">
+        <div class="client-logo"><img src="img/clientes/ecoimagen.png"        alt=""></div>
+        <div class="client-logo"><img src="img/clientes/viviendas.png"        alt=""></div>
+        <div class="client-logo"><img src="img/clientes/colpatria.png"        alt=""></div>
+        <div class="client-logo"><img src="img/clientes/cens.png"             alt=""></div>
+        <div class="client-logo"><img src="img/clientes/sura.png"             alt=""></div>
+        <div class="client-logo"><img src="img/clientes/american-airlines.png" alt=""></div>
+        <div class="client-logo"><img src="img/clientes/oracle.png"           alt=""></div>
+        <div class="client-logo"><img src="img/clientes/aseo-urbano.png"      alt=""></div>
+        <div class="client-logo"><img src="img/clientes/jetblue.png"          alt=""></div>
+        <div class="client-logo"><img src="img/clientes/elvecino.png"         alt=""></div>
+        <div class="client-logo"><img src="img/clientes/del-corazon.png"      alt=""></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     CATÁLOGO POR CATEGORÍAS
+═══════════════════════════════════════════ -->
+<section class="category-section" id="catalogo">
+  <div class="section-header">
+    <p class="section-label">Catálogo completo</p>
+    <h2 class="section-title">Explora todo lo que<br>puedes personalizar</h2>
+    <p class="section-sub">Desde pequeños detalles hasta grandes campañas, tenemos el producto perfecto para tu marca.</p>
+  </div>
+  <div class="cat-grid">
+    <div class="cat-card">
+      <div class="cat-icon">☕</div>
+      <div class="cat-name">Mugs & Pocillos</div>
+      <div class="cat-count">38 productos</div>
+      <a href="mugs.html" class="cat-cta">Ver todos</a>
+    </div>
+    <div class="cat-card">
+      <div class="cat-icon">🥤</div>
+      <div class="cat-name">Termos & Vasos</div>
+      <div class="cat-count">42 productos</div>
+      <a href="termos.html" class="cat-cta">Ver todos</a>
+    </div>
+    <div class="cat-card">
+      <div class="cat-icon">🧢</div>
+      <div class="cat-name">Gorras</div>
+      <div class="cat-count">54 productos</div>
+      <a href="gorras.html" class="cat-cta">Ver todos</a>
+    </div>
+    <div class="cat-card">
+      <div class="cat-icon">🖊️</div>
+      <div class="cat-name">Lapiceros</div>
+      <div class="cat-count">80 productos</div>
+      <a href="lapiceros.html" class="cat-cta">Ver todos</a>
+    </div>
+    <div class="cat-card">
+      <div class="cat-icon">🎒</div>
+      <div class="cat-name">Tulas & Mochilas</div>
+      <div class="cat-count">46 productos</div>
+      <a href="tulas.html" class="cat-cta">Ver todos</a>
+    </div>
+    <div class="cat-card">
+      <div class="cat-icon">☂️</div>
+      <div class="cat-name">Sombrillas</div>
+      <div class="cat-count">28 productos</div>
+      <a href="sombrillas.html" class="cat-cta">Ver todos</a>
+    </div>
+    <div class="cat-card">
+      <div class="cat-icon">💾</div>
+      <div class="cat-name">USB & Tecnología</div>
+      <div class="cat-count">36 productos</div>
+      <a href="usb.html" class="cat-cta">Ver todos</a>
+    </div>
+    <div class="cat-card">
+      <div class="cat-icon">👕</div>
+      <div class="cat-name">Textiles</div>
+      <div class="cat-count">65 productos</div>
+      <a href="textiles.html" class="cat-cta">Ver todos</a>
+    </div>
+    <div class="cat-card">
+      <div class="cat-icon">📓</div>
+      <div class="cat-name">Cuadernos & Libretas</div>
+      <div class="cat-count">44 productos</div>
+      <a href="cuadernos.html" class="cat-cta">Ver todos</a>
+    </div>
+    <div class="cat-card">
+      <div class="cat-icon">🎁</div>
+      <div class="cat-name">Kits Corporativos</div>
+      <div class="cat-count">24 kits</div>
+      <a href="kits.html" class="cat-cta">Ver todos</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     STATS BAND
+═══════════════════════════════════════════ -->
+<div class="stats-band">
+  <div class="stats-inner">
+    <div>
+      <div class="stat-num">+500</div>
+      <div class="stat-label">Productos disponibles para personalizar</div>
+    </div>
+    <div>
+      <div class="stat-num">+200</div>
+      <div class="stat-label">Marcas que confían en ProMarca</div>
+    </div>
+    <div>
+      <div class="stat-num">8 años</div>
+      <div class="stat-label">Experiencia en mercadeo promocional</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PROMO GRID — 2 columnas
+═══════════════════════════════════════════ -->
+<div class="promo-grid" id="destacados">
+
+  <div class="promo-card">
+    <p class="promo-eyebrow">Más vendido</p>
+    <h2 class="promo-title">Termos<br>Premium</h2>
+    <p class="promo-sub">Acero inoxidable con doble pared. Tu logo grabado a láser para que nunca se borre.</p>
+    <div class="promo-links">
+      <a href="termos.html">Ver catálogo</a>
+      <a href="#contacto">Cotizar</a>
+    </div>
+    <div class="promo-visual">🥤</div>
+  </div>
+
+  <div class="promo-card dark-card">
+    <p class="promo-eyebrow">Nueva colección</p>
+    <h2 class="promo-title">Gorras<br>2026</h2>
+    <p class="promo-sub">Bordado premium en 3D o transfer. Más de 12 colores disponibles con ajuste universal.</p>
+    <div class="promo-links">
+      <a href="gorras.html">Ver catálogo</a>
+      <a href="#contacto">Cotizar</a>
+    </div>
+    <div class="promo-visual">🧢</div>
+  </div>
+
+  <div class="promo-card dark-card">
+    <p class="promo-eyebrow">Esencial de oficina</p>
+    <h2 class="promo-title">Lapiceros<br>con logotipo</h2>
+    <p class="promo-sub">Desde 100 unidades. Impresión serigráfica de alta resolución en 4 colores.</p>
+    <div class="promo-links">
+      <a href="lapiceros.html">Ver catálogo</a>
+      <a href="#contacto">Cotizar</a>
+    </div>
+    <div class="promo-visual">🖊️</div>
+  </div>
+
+  <div class="promo-card">
+    <p class="promo-eyebrow">Tendencia 2026</p>
+    <h2 class="promo-title">Tulas &<br>Mochilas</h2>
+    <p class="promo-sub">Canvas reciclado y tela premium. Sublimación total o bordado en panel frontal.</p>
+    <div class="promo-links">
+      <a href="tulas.html">Ver catálogo</a>
+      <a href="#contacto">Cotizar</a>
+    </div>
+    <div class="promo-visual">🎒</div>
+  </div>
+
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     FEATURE SECTION — Personalización
+═══════════════════════════════════════════ -->
+<section class="feature-section" id="personalizacion">
+  <div class="feature-inner">
+    <div class="feature-text">
+      <p class="label">Personalización</p>
+      <h2>Tu logo en cada superficie.</h2>
+      <p>Usamos las mejores técnicas del mercado: serigrafía, sublimación, bordado 3D, grabado láser y transfer digital. Cada producto pasa por un control de calidad riguroso antes de llegar a tus manos.</p>
+      <a href="#contacto" class="btn btn-primary" style="font-size:15px;">Solicitar muestra</a>
+    </div>
+    <div class="feature-visual">🖨️</div>
+  </div>
+</section>
+
+<section style="background:var(--bg); padding:80px 0;">
+  <div class="feature-inner reverse" style="max-width:1200px;margin:0 auto;padding:0 24px;">
+    <div class="feature-text">
+      <p class="label">Tiempos de entrega</p>
+      <h2>Rápido cuando más lo necesitas.</h2>
+      <p>Entendemos que las campañas tienen fechas. Por eso ofrecemos producción express en menos de 5 días hábiles para pedidos urgentes. Envíos a todo el territorio con rastreo en tiempo real.</p>
+      <a href="#contacto" class="btn btn-primary" style="font-size:15px;">Ver plazos de entrega</a>
+    </div>
+    <div class="feature-visual" style="background: linear-gradient(135deg, #fff3e0, #ff9d60);">🚚</div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     TESTIMONIAL
+═══════════════════════════════════════════ -->
+<section class="testimonial-section">
+  <p class="section-label" style="margin-bottom:32px;">Lo que dicen nuestros clientes</p>
+  <blockquote class="quote">
+    "Los termos personalizados que hicimos con ProMarca fueron el mejor regalo corporativo que hemos dado. La calidad superó todas nuestras expectativas y la atención fue excepcional."
+  </blockquote>
+  <p class="quote-author"><strong>María Fernanda Reyes</strong> — Gerente de Marketing, Grupo Bancario Nacional</p>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     HERO 2 — KITS CORPORATIVOS (gris)
+═══════════════════════════════════════════ -->
+<section class="hero gray" style="min-height:60vh;" id="kits">
+  <p class="hero-eyebrow">Solución integral</p>
+  <h1 class="hero-title" style="font-size:clamp(36px,6vw,66px);">Kits corporativos listos para regalar.</h1>
+  <p class="hero-sub">Armamos tu kit a medida: seleccionamos los productos, los personalizamos y los empacamos con tu branding. Perfecto para onboarding, eventos y temporadas.</p>
+  <div class="hero-ctas">
+    <a href="#contacto" class="btn btn-primary">Cotizar kit personalizado</a>
+  </div>
+  <div class="hero-mosaic" style="margin-top:40px;">
+    <div class="tile" style="background:linear-gradient(135deg,#e3f0ff,#2997ff);">🎁</div>
+    <div class="tile" style="background:linear-gradient(135deg,#fff3e0,#ffcc00);">📓</div>
+    <div class="tile" style="background:linear-gradient(135deg,#e3ffe3,#34c759);">☕</div>
+    <div class="tile" style="background:linear-gradient(135deg,#ffe0e0,#ff3b30);">🥤</div>
+    <div class="tile" style="background:linear-gradient(135deg,#f3e0ff,#af52de);">🖊️</div>
+    <div class="tile" style="background:linear-gradient(135deg,#1d1d1f,#3d3d3f);">🧢</div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     CTA BAND
+═══════════════════════════════════════════ -->
+<div class="cta-band" id="contacto">
+  <h2>¿Listo para llevar<br>tu marca más lejos?</h2>
+  <p>Recibe tu cotización personalizada en menos de 24 horas.</p>
+  <a href="mailto:hola@promarca.co" class="btn-white">Solicitar cotización</a>
+  <a href="https://wa.me/573000000000" class="btn-outline-white">Escríbenos por WhatsApp</a>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer-sosumi">
+    <p>Los precios y disponibilidad están sujetos a cambios sin previo aviso. Los pedidos mínimos varían según el producto. Consulta a nuestro equipo para condiciones especiales en grandes volúmenes.</p>
+  </div>
+  <nav class="footer-dir" id="nosotros">
+    <div class="footer-col">
+      <h3>Catálogo</h3>
+      <ul>
+        <li><a href="mugs.html">Mugs & Pocillos</a></li>
+        <li><a href="termos.html">Termos & Vasos</a></li>
+        <li><a href="gorras.html">Gorras</a></li>
+        <li><a href="lapiceros.html">Lapiceros</a></li>
+        <li><a href="tulas.html">Tulas & Mochilas</a></li>
+        <li><a href="sombrillas.html">Sombrillas</a></li>
+        <li><a href="usb.html">USB & Tecnología</a></li>
+        <li><a href="#catalogo">Ver todo el catálogo</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3>Servicios</h3>
+      <ul>
+        <li><a href="kits.html">Kits corporativos</a></li>
+        <li><a href="#">Producción express</a></li>
+        <li><a href="#">Diseño & Arte final</a></li>
+        <li><a href="#">Muestras físicas</a></li>
+        <li><a href="#">Envíos nacionales</a></li>
+        <li><a href="#">Pedidos al por mayor</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3>Empresa</h3>
+      <ul>
+        <li><a href="#">Quiénes somos</a></li>
+        <li><a href="#">Clientes</a></li>
+        <li><a href="#">Casos de éxito</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Trabaja con nosotros</a></li>
+        <li><a href="#">Contáctanos</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3>Soporte</h3>
+      <ul>
+        <li><a href="#">¿Cómo hacer un pedido?</a></li>
+        <li><a href="#">Tiempos de producción</a></li>
+        <li><a href="#">Guía de arte</a></li>
+        <li><a href="#">Preguntas frecuentes</a></li>
+        <li><a href="#">Estado de mi pedido</a></li>
+        <li><a href="#">Política de cambios</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="footer-bottom">
+    <p>Copyright © 2026 ProMarca. Todos los derechos reservados.</p>
+    <div class="footer-legal">
+      <a href="#">Política de privacidad</a>
+      <a href="#">Términos de uso</a>
+      <a href="#">Mapa del sitio</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    const slides = document.querySelectorAll('.hero-carousel .slide');
+    const dots   = document.querySelectorAll('.carousel-dots .dot');
+    let current  = 0;
+    let timer;
+
+    function goTo(index) {
+      slides[current].classList.remove('active');
+      dots[current].classList.remove('active');
+      current = index;
+      slides[current].classList.add('active');
+      dots[current].classList.add('active');
+    }
+
+    function next() { goTo((current + 1) % slides.length); }
+
+    timer = setInterval(next, 4000);
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        clearInterval(timer);
+        goTo(i);
+        timer = setInterval(next, 4000);
+      });
+    });
+  })();
+</script>
+</body>
+</html>
