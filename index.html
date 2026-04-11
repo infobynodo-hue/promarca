@@ -658,6 +658,74 @@
       margin-top: 4px;
     }
 
+    /* ─── LIQUID GLASS BUTTON ─── */
+    .btn-glass {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border-radius: 9999px;
+      overflow: hidden;
+      border: none;
+      background: transparent;
+      transition: transform 0.3s cubic-bezier(0.1,0.4,0.2,1);
+      isolation: isolate;
+    }
+    .btn-glass:hover { transform: scale(1.05); }
+    .btn-glass:active { transform: scale(0.97); }
+
+    /* glass sphere layer */
+    .btn-glass::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 9999px;
+      box-shadow:
+        0 0 6px rgba(0,0,0,0.03),
+        0 2px 6px rgba(0,0,0,0.08),
+        inset 3px 3px 0.5px -3px rgba(255,255,255,0.7),
+        inset -3px -3px 0.5px -3px rgba(0,0,0,0.4),
+        inset 1px 1px 1px -0.5px rgba(255,255,255,0.5),
+        inset -1px -1px 1px -0.5px rgba(0,0,0,0.3),
+        inset 0 0 8px 4px rgba(255,255,255,0.08),
+        0 0 14px rgba(255,255,255,0.12);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* blur/distortion backdrop */
+    .btn-glass::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 9999px;
+      backdrop-filter: blur(12px) saturate(160%);
+      -webkit-backdrop-filter: blur(12px) saturate(160%);
+      z-index: -1;
+    }
+
+    /* inner text stays on top */
+    .btn-glass > * { position: relative; z-index: 2; }
+
+    /* override btn-white & btn-outline-white to glass */
+    .btn-white.btn-glass {
+      background: rgba(255,255,255,0.18);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 14px 28px;
+    }
+    .btn-outline-white.btn-glass {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.35);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 500;
+      padding: 13px 28px;
+      margin-left: 12px;
+    }
+
     /* ─── SHINE BORDER ─── */
     @keyframes shine-pulse {
       0%   { background-position: 0% 0%; }
@@ -806,6 +874,17 @@
   </style>
 </head>
 <body>
+<svg style="position:absolute;width:0;height:0;overflow:hidden;" aria-hidden="true">
+  <defs>
+    <filter id="container-glass" x="0%" y="0%" width="100%" height="100%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.05 0.05" numOctaves="1" seed="1" result="turbulence"/>
+      <feGaussianBlur in="turbulence" stdDeviation="2" result="blurredNoise"/>
+      <feDisplacementMap in="SourceGraphic" in2="blurredNoise" scale="60" xChannelSelector="R" yChannelSelector="B" result="displaced"/>
+      <feGaussianBlur in="displaced" stdDeviation="3" result="finalBlur"/>
+      <feComposite in="finalBlur" in2="finalBlur" operator="over"/>
+    </filter>
+  </defs>
+</svg>
 
 <!-- ═══════════════════════════════════════════
      NAVEGACIÓN
@@ -839,8 +918,8 @@
   <h1 class="hero-title">Tu marca.<br>En cada detalle.</h1>
   <p class="hero-sub">Productos promocionales que generan recordación duradera. Personalizados para tu empresa.</p>
   <div class="hero-ctas">
-    <a href="#catalogo" class="btn btn-primary">Ver catálogo</a>
-    <a href="#personalizacion" class="btn btn-secondary" style="color:#86868b; border-bottom:1px solid #86868b;">Cómo personalizar</a>
+    <a href="#catalogo" class="btn btn-primary btn-glass">Ver catálogo</a>
+    <a href="#personalizacion" class="btn btn-secondary btn-glass" style="color:#86868b; border-bottom:1px solid #86868b;">Cómo personalizar</a>
   </div>
   <!-- Carousel de fondo — reemplaza cada slide con tu imagen real -->
   <div class="hero-carousel" aria-hidden="true">
@@ -1000,7 +1079,7 @@
 ═══════════════════════════════════════════ -->
 <div class="promo-grid" id="destacados">
 
-  <div class="promo-card shine">
+  <div class="promo-card">
     <p class="promo-eyebrow">Más vendido</p>
     <h2 class="promo-title">Termos<br>Premium</h2>
     <p class="promo-sub">Acero inoxidable con doble pared. Tu logo grabado a láser para que nunca se borre.</p>
@@ -1011,7 +1090,7 @@
     <div class="promo-visual">🥤</div>
   </div>
 
-  <div class="promo-card dark-card shine">
+  <div class="promo-card dark-card">
     <p class="promo-eyebrow">Nueva colección</p>
     <h2 class="promo-title">Gorras<br>2026</h2>
     <p class="promo-sub">Bordado premium en 3D o transfer. Más de 12 colores disponibles con ajuste universal.</p>
@@ -1022,7 +1101,7 @@
     <div class="promo-visual">🧢</div>
   </div>
 
-  <div class="promo-card dark-card shine">
+  <div class="promo-card dark-card">
     <p class="promo-eyebrow">Esencial de oficina</p>
     <h2 class="promo-title">Lapiceros<br>con logotipo</h2>
     <p class="promo-sub">Desde 100 unidades. Impresión serigráfica de alta resolución en 4 colores.</p>
@@ -1033,7 +1112,7 @@
     <div class="promo-visual">🖊️</div>
   </div>
 
-  <div class="promo-card shine">
+  <div class="promo-card">
     <p class="promo-eyebrow">Tendencia 2026</p>
     <h2 class="promo-title">Tulas &<br>Mochilas</h2>
     <p class="promo-sub">Canvas reciclado y tela premium. Sublimación total o bordado en panel frontal.</p>
@@ -1056,7 +1135,7 @@
       <p class="label">Personalización</p>
       <h2>Tu logo en cada superficie.</h2>
       <p>Usamos las mejores técnicas del mercado: serigrafía, sublimación, bordado 3D, grabado láser y transfer digital. Cada producto pasa por un control de calidad riguroso antes de llegar a tus manos.</p>
-      <a href="#contacto" class="btn btn-primary" style="font-size:15px;">Solicitar muestra</a>
+      <a href="#contacto" class="btn btn-primary btn-glass" style="font-size:15px;">Solicitar muestra</a>
     </div>
     <div class="feature-visual">🖨️</div>
   </div>
@@ -1068,7 +1147,7 @@
       <p class="label">Tiempos de entrega</p>
       <h2>Rápido cuando más lo necesitas.</h2>
       <p>Entendemos que las campañas tienen fechas. Por eso ofrecemos producción express en menos de 5 días hábiles para pedidos urgentes. Envíos a todo el territorio con rastreo en tiempo real.</p>
-      <a href="#contacto" class="btn btn-primary" style="font-size:15px;">Ver plazos de entrega</a>
+      <a href="#contacto" class="btn btn-primary btn-glass" style="font-size:15px;">Ver plazos de entrega</a>
     </div>
     <div class="feature-visual" style="background: linear-gradient(135deg, #fff3e0, #ff9d60);">🚚</div>
   </div>
@@ -1257,7 +1336,7 @@
   <h1 class="hero-title" style="font-size:clamp(36px,6vw,66px);">Kits corporativos listos para regalar.</h1>
   <p class="hero-sub">Armamos tu kit a medida: seleccionamos los productos, los personalizamos y los empacamos con tu branding. Perfecto para onboarding, eventos y temporadas.</p>
   <div class="hero-ctas">
-    <a href="#contacto" class="btn btn-primary">Cotizar kit personalizado</a>
+    <a href="#contacto" class="btn btn-primary btn-glass">Cotizar kit personalizado</a>
   </div>
   <div class="hero-mosaic" style="margin-top:40px;">
     <div class="tile" style="background:linear-gradient(135deg,#e3f0ff,#2997ff);">🎁</div>
@@ -1276,8 +1355,8 @@
 <div class="cta-band" id="contacto">
   <h2>¿Listo para llevar<br>tu marca más lejos?</h2>
   <p>Recibe tu cotización personalizada en menos de 24 horas.</p>
-  <a href="mailto:hola@promarca.co" class="btn-white shine">Solicitar cotización</a>
-  <a href="https://wa.me/573000000000" class="btn-outline-white shine">Escríbenos por WhatsApp</a>
+  <a href="mailto:hola@promarca.co" class="btn-white btn-glass shine">Solicitar cotización</a>
+  <a href="https://wa.me/573000000000" class="btn-outline-white btn-glass shine">Escríbenos por WhatsApp</a>
 </div>
 
 
