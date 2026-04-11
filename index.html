@@ -372,6 +372,7 @@
       text-align: center;
       cursor: pointer;
       transition: transform .2s, box-shadow .2s;
+      overflow: visible;
     }
     .cat-card:hover {
       transform: translateY(-3px);
@@ -657,6 +658,39 @@
       margin-top: 4px;
     }
 
+    /* ─── SHINE BORDER ─── */
+    @keyframes shine-pulse {
+      0%   { background-position: 0% 0%; }
+      50%  { background-position: 100% 100%; }
+      100% { background-position: 0% 0%; }
+    }
+
+    /* Applied to cat-cards, promo-cards, btn-cta, feature images */
+    .shine {
+      position: relative;
+    }
+    .shine::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1.5px;
+      background: radial-gradient(
+        transparent, transparent,
+        #ff6b1a, #ffaa60, #ff6b1a,
+        transparent, transparent
+      );
+      background-size: 300% 300%;
+      animation: shine-pulse 6s infinite linear;
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      z-index: 1;
+    }
+
     /* ─── CTA BAND ─── */
     .cta-band {
       background: linear-gradient(135deg, #ff6b1a 0%, #e85a0a 100%);
@@ -876,61 +910,61 @@
     <p class="section-sub">Desde pequeños detalles hasta grandes campañas, tenemos el producto perfecto para tu marca.</p>
   </div>
   <div class="cat-grid">
-    <div class="cat-card">
+    <div class="cat-card shine">
       <div class="cat-icon">☕</div>
       <div class="cat-name">Mugs & Pocillos</div>
       <div class="cat-count">38 productos</div>
       <a href="mugs.html" class="cat-cta">Ver todos</a>
     </div>
-    <div class="cat-card">
+    <div class="cat-card shine">
       <div class="cat-icon">🥤</div>
       <div class="cat-name">Termos & Vasos</div>
       <div class="cat-count">42 productos</div>
       <a href="termos.html" class="cat-cta">Ver todos</a>
     </div>
-    <div class="cat-card">
+    <div class="cat-card shine">
       <div class="cat-icon">🧢</div>
       <div class="cat-name">Gorras</div>
       <div class="cat-count">54 productos</div>
       <a href="gorras.html" class="cat-cta">Ver todos</a>
     </div>
-    <div class="cat-card">
+    <div class="cat-card shine">
       <div class="cat-icon">🖊️</div>
       <div class="cat-name">Lapiceros</div>
       <div class="cat-count">80 productos</div>
       <a href="lapiceros.html" class="cat-cta">Ver todos</a>
     </div>
-    <div class="cat-card">
+    <div class="cat-card shine">
       <div class="cat-icon">🎒</div>
       <div class="cat-name">Tulas & Mochilas</div>
       <div class="cat-count">46 productos</div>
       <a href="tulas.html" class="cat-cta">Ver todos</a>
     </div>
-    <div class="cat-card">
+    <div class="cat-card shine">
       <div class="cat-icon">☂️</div>
       <div class="cat-name">Sombrillas</div>
       <div class="cat-count">28 productos</div>
       <a href="sombrillas.html" class="cat-cta">Ver todos</a>
     </div>
-    <div class="cat-card">
+    <div class="cat-card shine">
       <div class="cat-icon">💾</div>
       <div class="cat-name">USB & Tecnología</div>
       <div class="cat-count">36 productos</div>
       <a href="usb.html" class="cat-cta">Ver todos</a>
     </div>
-    <div class="cat-card">
+    <div class="cat-card shine">
       <div class="cat-icon">👕</div>
       <div class="cat-name">Textiles</div>
       <div class="cat-count">65 productos</div>
       <a href="textiles.html" class="cat-cta">Ver todos</a>
     </div>
-    <div class="cat-card">
+    <div class="cat-card shine">
       <div class="cat-icon">📓</div>
       <div class="cat-name">Cuadernos & Libretas</div>
       <div class="cat-count">44 productos</div>
       <a href="cuadernos.html" class="cat-cta">Ver todos</a>
     </div>
-    <div class="cat-card">
+    <div class="cat-card shine">
       <div class="cat-icon">🎁</div>
       <div class="cat-name">Kits Corporativos</div>
       <div class="cat-count">24 kits</div>
@@ -966,7 +1000,7 @@
 ═══════════════════════════════════════════ -->
 <div class="promo-grid" id="destacados">
 
-  <div class="promo-card">
+  <div class="promo-card shine">
     <p class="promo-eyebrow">Más vendido</p>
     <h2 class="promo-title">Termos<br>Premium</h2>
     <p class="promo-sub">Acero inoxidable con doble pared. Tu logo grabado a láser para que nunca se borre.</p>
@@ -977,7 +1011,7 @@
     <div class="promo-visual">🥤</div>
   </div>
 
-  <div class="promo-card dark-card">
+  <div class="promo-card dark-card shine">
     <p class="promo-eyebrow">Nueva colección</p>
     <h2 class="promo-title">Gorras<br>2026</h2>
     <p class="promo-sub">Bordado premium en 3D o transfer. Más de 12 colores disponibles con ajuste universal.</p>
@@ -988,7 +1022,7 @@
     <div class="promo-visual">🧢</div>
   </div>
 
-  <div class="promo-card dark-card">
+  <div class="promo-card dark-card shine">
     <p class="promo-eyebrow">Esencial de oficina</p>
     <h2 class="promo-title">Lapiceros<br>con logotipo</h2>
     <p class="promo-sub">Desde 100 unidades. Impresión serigráfica de alta resolución en 4 colores.</p>
@@ -999,7 +1033,7 @@
     <div class="promo-visual">🖊️</div>
   </div>
 
-  <div class="promo-card">
+  <div class="promo-card shine">
     <p class="promo-eyebrow">Tendencia 2026</p>
     <h2 class="promo-title">Tulas &<br>Mochilas</h2>
     <p class="promo-sub">Canvas reciclado y tela premium. Sublimación total o bordado en panel frontal.</p>
@@ -1242,8 +1276,8 @@
 <div class="cta-band" id="contacto">
   <h2>¿Listo para llevar<br>tu marca más lejos?</h2>
   <p>Recibe tu cotización personalizada en menos de 24 horas.</p>
-  <a href="mailto:hola@promarca.co" class="btn-white">Solicitar cotización</a>
-  <a href="https://wa.me/573000000000" class="btn-outline-white">Escríbenos por WhatsApp</a>
+  <a href="mailto:hola@promarca.co" class="btn-white shine">Solicitar cotización</a>
+  <a href="https://wa.me/573000000000" class="btn-outline-white shine">Escríbenos por WhatsApp</a>
 </div>
 
 
